@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PortfolioOS</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+<div id="boot-screen">
+<h1>PortfolioOS v1.0</h1>
+<p id="boot-text">Initializing system...</p>
+</div>
+
+
+<div id="desktop" class="hidden">
+
+<div class="desktop-icons">
+
+<div class="icon" data-app="about">
+<img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png">
+<span>About</span>
+</div>
+
+<div class="icon" data-app="projects">
+<img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
+<span>Projects</span>
+</div>
+
+<div class="icon" data-app="skills">
+<img src="https://cdn-icons-png.flaticon.com/512/2721/2721279.png">
+<span>Skills</span>
+</div>
+
+<div class="icon" data-app="github">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733553.png">
+<span>GitHub</span>
+</div>
+
+<div class="icon" data-app="contact">
+<img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+<span>Contact</span>
+</div>
+
+</div>
+
+
+<div id="taskbar">
+
+<button id="start-btn">Start</button>
+
+<div id="task-apps"></div>
+
+<div id="clock"></div>
+
+</div>
+
+
+<div id="start-menu" class="hidden">
+
+<div class="start-title">PortfolioOS</div>
+
+<div class="start-item" data-app="about">About</div>
+<div class="start-item" data-app="projects">Projects</div>
+<div class="start-item" data-app="skills">Skills</div>
+<div class="start-item" data-app="github">GitHub</div>
+<div class="start-item" data-app="contact">Contact</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
