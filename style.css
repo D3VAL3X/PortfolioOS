@@ -1,3 +1,5 @@
+/* GENERAL */
+
 body{
 margin:0;
 background:#111;
@@ -6,9 +8,16 @@ justify-content:center;
 align-items:center;
 height:100vh;
 font-family:sans-serif;
+overflow:hidden;
 }
 
-/* Monitor frame */
+.hidden{
+display:none;
+}
+
+
+
+/* MONITOR FRAME */
 
 #monitor{
 width:1400px;
@@ -16,7 +25,7 @@ height:900px;
 background:#2b2b2b;
 padding:40px;
 border-radius:20px;
-box-shadow:0 0 50px black;
+box-shadow:0 0 60px black;
 display:flex;
 flex-direction:column;
 }
@@ -29,7 +38,9 @@ overflow:hidden;
 border-radius:10px;
 }
 
-/* CRT scanlines */
+
+
+/* CRT SCANLINES */
 
 #screen::after{
 content:"";
@@ -48,7 +59,9 @@ transparent 3px
 pointer-events:none;
 }
 
-/* monitor bottom */
+
+
+/* MONITOR BASE */
 
 #monitor-bottom{
 height:40px;
@@ -65,7 +78,9 @@ background:lime;
 border-radius:50%;
 }
 
-/* Boot */
+
+
+/* BOOT SCREEN */
 
 #boot-screen{
 background:black;
@@ -92,11 +107,9 @@ width:0%;
 background:lime;
 }
 
-.hidden{
-display:none;
-}
 
-/* Desktop icons */
+
+/* DESKTOP ICONS */
 
 .desktop-icons{
 padding:20px;
@@ -116,7 +129,13 @@ cursor:pointer;
 width:48px;
 }
 
-/* Windows */
+.icon:hover{
+background:rgba(255,255,255,0.2);
+}
+
+
+
+/* WINDOWS */
 
 .window{
 position:absolute;
@@ -125,7 +144,14 @@ height:400px;
 background:#c0c0c0;
 border:2px solid black;
 box-shadow:4px 4px 0px #444;
+
+display:flex;
+flex-direction:column;
 }
+
+
+
+/* TITLE BAR */
 
 .titlebar{
 background:#000080;
@@ -133,7 +159,14 @@ color:white;
 padding:4px;
 display:flex;
 justify-content:space-between;
+align-items:center;
 cursor:move;
+flex-shrink:0;
+}
+
+.window-buttons{
+display:flex;
+gap:2px;
 }
 
 .window-buttons button{
@@ -144,13 +177,39 @@ height:22px;
 cursor:pointer;
 }
 
+
+
+/* WINDOW CONTENT */
+
 .window-content{
 padding:10px;
-height:calc(100% - 30px);
-overflow:auto;
+flex-grow:1;
+overflow-y:auto;
+overflow-x:hidden;
+box-sizing:border-box;
+background:#c0c0c0;
 }
 
-/* Taskbar */
+
+
+/* RETRO SCROLLBAR */
+
+.window-content::-webkit-scrollbar{
+width:10px;
+}
+
+.window-content::-webkit-scrollbar-track{
+background:#c0c0c0;
+}
+
+.window-content::-webkit-scrollbar-thumb{
+background:#808080;
+border:2px solid #c0c0c0;
+}
+
+
+
+/* TASKBAR */
 
 #taskbar{
 position:absolute;
@@ -160,11 +219,14 @@ height:40px;
 background:#c0c0c0;
 display:flex;
 align-items:center;
+border-top:2px solid white;
 }
 
 #start-btn{
 margin-left:5px;
 padding:4px 10px;
+border:2px solid white;
+background:#c0c0c0;
 cursor:pointer;
 }
 
@@ -175,6 +237,8 @@ margin-left:10px;
 }
 
 .task-btn{
+background:#c0c0c0;
+border:2px solid white;
 padding:3px 10px;
 cursor:pointer;
 }
@@ -184,7 +248,9 @@ margin-left:auto;
 padding-right:10px;
 }
 
-/* Start menu */
+
+
+/* START MENU */
 
 #start-menu{
 position:absolute;
@@ -212,7 +278,9 @@ background:#000080;
 color:white;
 }
 
-/* file explorer */
+
+
+/* FILE EXPLORER ITEMS */
 
 .file{
 cursor:pointer;
@@ -221,4 +289,45 @@ padding:5px;
 
 .file:hover{
 background:#ddd;
+}
+
+
+
+/* SHUTDOWN SCREEN */
+
+#shutdown-screen{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.crt-off{
+width:100%;
+height:100%;
+background:black;
+animation:crtOff 1s forwards;
+}
+
+@keyframes crtOff{
+
+0%{
+opacity:1;
+}
+
+70%{
+height:2px;
+background:white;
+}
+
+100%{
+opacity:0;
+}
+
 }
