@@ -1,10 +1,22 @@
-const boot = document.getElementById("boot-screen")
-const desktop = document.getElementById("desktop")
+const bootScreen=document.getElementById("boot-screen")
+const bootBar=document.getElementById("boot-progress")
+const desktop=document.getElementById("desktop")
 
-setTimeout(()=>{
-boot.style.display="none"
+let progress=0
+
+const bootInterval=setInterval(()=>{
+
+progress+=5
+bootBar.style.width=progress+"%"
+
+if(progress>=100){
+clearInterval(bootInterval)
+
+bootScreen.style.display="none"
 desktop.classList.remove("hidden")
-},2500)
+}
+
+},100)
 
 
 
@@ -47,9 +59,13 @@ win.style.left=Math.random()*400+200+"px"
 win.innerHTML=`
 <div class="titlebar">
 <span>${app}.exe</span>
+
 <div class="window-buttons">
+<button class="min">_</button>
+<button class="max">□</button>
 <button class="close">X</button>
 </div>
+
 </div>
 
 <div class="window-content">
@@ -57,12 +73,21 @@ ${getAppContent(app)}
 </div>
 `
 
-document.getElementById("desktop").appendChild(win)
+desktop.appendChild(win)
 
 makeDraggable(win)
 
-win.querySelector(".close").onclick=()=>{
-win.remove()
+win.querySelector(".close").onclick=()=>win.remove()
+
+win.querySelector(".min").onclick=()=>win.style.display="none"
+
+win.querySelector(".max").onclick=()=>{
+
+win.style.top="20px"
+win.style.left="20px"
+win.style.width="90%"
+win.style.height="80%"
+
 }
 
 addTaskButton(app,win)
@@ -74,26 +99,26 @@ addTaskButton(app,win)
 function getAppContent(app){
 
 if(app==="about"){
+
 return `
 <h2>About Me</h2>
-<p>Welcome to my PortfolioOS.</p>
-<p>I am a developer passionate about building software and web applications.</p>
+<p>Hello! I'm a developer passionate about building software and web apps.</p>
 `
 }
 
 if(app==="projects"){
+
 return `
 <h2>Projects</h2>
-<ul>
-<li>Weather App</li>
-<li>Task Manager</li>
-<li>AI Chatbot</li>
-<li>PortfolioOS</li>
-</ul>
+
+<div class="file" onclick="openProject('Weather App')">Weather App</div>
+<div class="file" onclick="openProject('Task Manager')">Task Manager</div>
+<div class="file" onclick="openProject('AI Chatbot')">AI Chatbot</div>
 `
 }
 
 if(app==="skills"){
+
 return `
 <h2>Skills</h2>
 <ul>
@@ -106,18 +131,54 @@ return `
 }
 
 if(app==="github"){
+
 return `
 <h2>GitHub</h2>
-<p><a href="https://github.com" target="_blank">Visit my GitHub</a></p>
+<a href="https://github.com" target="_blank">Visit my GitHub</a>
 `
 }
 
 if(app==="contact"){
+
 return `
 <h2>Contact</h2>
 <p>Email: your@email.com</p>
 `
 }
+
+}
+
+
+
+function openProject(name){
+
+const win=document.createElement("div")
+win.className="window"
+
+win.style.top="150px"
+win.style.left="300px"
+
+win.innerHTML=`
+<div class="titlebar">
+<span>${name}</span>
+
+<div class="window-buttons">
+<button class="close">X</button>
+</div>
+
+</div>
+
+<div class="window-content">
+<h2>${name}</h2>
+<p>Project preview window</p>
+</div>
+`
+
+desktop.appendChild(win)
+
+makeDraggable(win)
+
+win.querySelector(".close").onclick=()=>win.remove()
 
 }
 
